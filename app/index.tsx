@@ -33,6 +33,7 @@ const s = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#555555",
   },
   Titulo: {
     fontSize: 32,

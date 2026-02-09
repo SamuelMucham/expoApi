@@ -1,6 +1,6 @@
 import { Image } from "expo-image";
 import { useEffect, useState } from "react";
-import { FlatList, StyleSheet, Text, TextInput, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 
 export default function List() {
   const [personagens, setPersonagens] = useState();
@@ -13,17 +13,13 @@ export default function List() {
         "https://dragonball-api.com/api/characters?page=" + page,
       );
       const data = await response.json();
-      setPersonagens(data.items);
+      setPersonagens((prev: any) => [...(prev || []), ...data.items]);
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    ferchCharacters();
-  }, []);
 
   useEffect(() => {
     if (page > 0 && page < 7) {
@@ -34,13 +30,7 @@ export default function List() {
     <>
       <View style={s.sreen}>
         <Text style={s.titulo}> Lista de Personagens</Text>
-        <TextInput
-          style={s.input}
-          placeholder="Digite o valor"
-          keyboardType="numeric"
-          value={page.toString()}
-          onChangeText={(value) => setPage(+value)}
-        />
+
         {loading ? (
           <View style={s.wrapimage}>
             <Image source={require("@/assets/load.gif")} style={s.loading} />
@@ -65,6 +55,7 @@ export default function List() {
                 </View>
               );
             }}
+            onEndReached={loading ? null : () => setPage((prev) => prev + 1)}
           />
         )}
       </View>
@@ -126,13 +117,5 @@ const s = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center",
     fontFamily: "JetBrains Mono",
-  },
-  input: {
-    color: "#ffffff",
-    fontSize: 22,
-    fontFamily: "JetBrains Mono",
-    borderColor: "black",
-    borderWidth: 1,
-    marginVertical: 10,
   },
 });
