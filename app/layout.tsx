@@ -5,6 +5,8 @@ export default function RootLayout() {
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="list" options={{ headerShown: false }} />
+      <Stack.Screen name="+notfoud" />
+      <Stack.Screen name="modal/[id]" options={{ presentation: "modal" }} />
     </Stack>
   );
 }

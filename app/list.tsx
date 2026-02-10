@@ -1,7 +1,7 @@
+import Personagens from "@/components/Personagens";
 import { Image } from "expo-image";
 import { useEffect, useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-
 export default function List() {
   const [personagens, setPersonagens] = useState();
   const [loading, setLoading] = useState(true);
@@ -39,21 +39,7 @@ export default function List() {
           <FlatList
             data={personagens}
             renderItem={({ item }: any) => {
-              return (
-                <View style={s.body}>
-                  <Text style={s.titulo}>{item.name}</Text>
-                  <Image source={{ uri: item.image }}></Image>
-                  <Text style={s.ki}>{item.ki}</Text>
-                  <Text style={s.race}>{item.race}</Text>
-                  <View style={s.imagecontainer}>
-                    <Image
-                      source={{ uri: item.image }}
-                      contentFit="cover"
-                      style={s.image}
-                    />
-                  </View>
-                </View>
-              );
+              return <Personagens item={item} />;
             }}
             onEndReached={loading ? null : () => setPage((prev) => prev + 1)}
           />

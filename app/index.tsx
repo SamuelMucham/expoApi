@@ -21,7 +21,7 @@ export default function Inicial() {
             router.push("/list");
           }}
         >
-          <Text style={s.btnText}>visitar personagens</Text>
+          <Text style={s.btnText}>Visitar personagens</Text>
         </TouchableOpacity>
       </View>
     </>
@@ -60,7 +60,6 @@ const s = StyleSheet.create({
     },
     shadowOpacity: 0.51,
     shadowRadius: 13.16,
-
     elevation: 20,
   },
   btnText: {
